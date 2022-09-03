@@ -23,14 +23,14 @@ ut/ut0lst.h
 |-|-|-|
 |count|ulint|链表中节点的个数（不包括基节点）|
 |start|Type*|指向链表头节点的指针（空链表则为NULL）|
-|end|Type*|执行尾节点的指针（空链表则为空）|
+|end|Type*|执行尾节点的指针（空链表则为NULL）|
 |node_ptr|NodePtr|指向用作链表成员字段的指针|
 
 相关函数：
 |函数名|说明|
 |-|-|
 |UT_LIST_INIT()|构造函数|
-|UT_LIST_ADD_FIRST()|添加节点为链表头节点|
+|UT_LIST_ADD_FIRST(LIST, ELEM)|添加节点为链表头节点|
 |UT_LIST_INSERT_AFTER(LIST, ELEM1, ELEM2)|将节点2添加到节点1之后|
 |UT_LIST_REMOVE(LIST, ELEM)|移除节点|
 |UT_LIST_GET_PREV(NAME, N)|获取指定节点的前继节点|
