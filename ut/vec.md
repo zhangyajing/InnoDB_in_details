@@ -1,4 +1,4 @@
-# vector
+# 动态数组（vector）
 
 涉及文件：
 ```cpp

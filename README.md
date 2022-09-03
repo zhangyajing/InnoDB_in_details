@@ -4,7 +4,8 @@
 [hash](./ha/hash.md)  
 [lock](./lock/%E9%94%81.md)    
 [链表](./ut/list.md)    
-[内存双链表](./ut/lst.md)  
+[内存双链表](./ut/lst.md)   
+[动态数组](./ut/vec.md)     
 [查询子系统](./que/que.md)  
 [buffer pool](./buf/)  
 
