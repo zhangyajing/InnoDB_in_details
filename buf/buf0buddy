@@ -1,0 +1,59 @@
+# 伙伴系统
+之前我们在mem章节已经介绍了mem内存堆的大致的结构，我们知道mem内存堆有三种表现形式。其中的一种会使用到
+就是我们今天要分析的伙伴系统。
+
+# 代码文件
+文件名称|5.7|8.0
+-|-|-
+buf0buddy.h|95|
+buf0buddy.cc|881|
+buf0buf.h|2482|
+buf0buddy.ic|139|
+sum|3597|
+
+# 函数
+
+1. buf_buddy_alloc(buf_pool_t* buf_pool, ulint size, ibool* lru) __attribute__(malloc)
+2. buf_buddy_free(buf_pool_t* buf_pool, void* buf, ulint size);
+3. buf_buddy_realloc(buf_pool_t* buf_pool, void* buf, ulint size);
+4. buf_buddy_condense_free(buf_pool_t* buf_pool);
+
+先从整体上看，这些函数都是跟buf_pool相关的，我们简单梳理下伙伴系统和buffer pool 的详细如下：
+
+[伙伴系统和buffer pool的关系](./buddy.excalidraw.png)
+
+
+// ToDo 翻译buf0buddy.cc 的备注到这里
+
+```cpp
+enum buf_buddy_state_t {
+    BUF_BUDDY_STATE_FREE,
+    BUF_BUDDY_STATE_USED,
+    BUF_BUDDY_STATE_PARITIALLY_USED
+}
+```
+
+接下来，我们先来梳理下buf0buddy.cc 目录下的函数，然后我们在整体来分析
+1. buf_buddy_stamp_is_free
+2. buf_buddy_stamp_free
+3. buf_buddy_get
+4. CheckZipFree
+5. buf_buddy_list_validate
+6. buf_buddy_check_free
+7. buf_buddy_is_free
+8. buf_buddy_add_to_free
+9. buf_buddy_remove_from_free
+10. buf_buddy_alloc_zip
+11. buf_buddy_block_free
+12. buf_buddy_block_register
+13. buf_buddy_alloc_from
+14. buf_buddy_alloc_low
+15. buf_buddy_relocate
+16. buf_buddy_free_low
+17. buf_buddy_realloc
+18. buf_buddy_condense_free
+
+
+
+
+

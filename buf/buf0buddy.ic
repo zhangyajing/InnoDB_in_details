@@ -1,0 +1,6 @@
+# 函数
+1. buf_buddy_alloc_low
+2. buf_buddy_free_low
+3. buf_buddy_get_slot
+4. buf_buddy_alloc
+5. buf_buddy_free
