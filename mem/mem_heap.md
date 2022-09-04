@@ -52,3 +52,4 @@ mem_heap_t 的几个要点知识梳理:
    * btr_search
 
 在dynamic模式下都是基于buddy伙伴系统来进行分配的。
+
