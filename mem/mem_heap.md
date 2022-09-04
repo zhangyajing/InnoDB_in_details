@@ -46,18 +46,24 @@ mem_heap_t 的几个要点知识梳理:
 在dynamic模式下都是基于buddy伙伴系统来进行分配的。
 
 
+<style>
+table th:first-of-type {
+    width: 40%;
+}
+table th:nth-of-type(2) {
+    width: 50%;
+}
+table th:nth-of-type(3) {
+    width: 10%;
+}
+</style>
 |宏名称|注解|备注|
 |-|-|-|
 |mem_heap_create(size)|这种情况下，默认使用MEM_HEAP_DYNAMIC模式||
-|mem_heap_create_typed|和mem_heap_create方式一样，只不过这个宏可以指定mem堆的类型||
-||||
-||||
-||||
-||||
+|mem_heap_create_typed(size, type)|和mem_heap_create方式一样，只不过这个宏可以指定mem堆的类型||
 
 
-
-
+# 函数梳理
 
 <table>
 <tr>
