@@ -70,16 +70,16 @@ table th:nth-of-type(3) {
 <td> 函数名称 </td> <td> 注解 </td> <td> 备注 </td>
 </tr>
 <tr>
-<td> 
+<td width="30%"> 
 
 ```cpp
 mem_heap_create_func(ulint size, const char* file_name, ulint line, ulint type) 
 ```
 </td>
-<td>
+<td width="50%">
 默认size如果为0,那么默认就取64字节，如果size < 64字节呢？这个写法不是很好，可以参考下8.0版本的代码实现, 然后就是根据大小和类型创建一个block块, 第一个block块不应该在buffer pool中，设置buf_block为空, 第一个块初始化base节点，并且把当前的block块添加到base链表中去
 </td>
-<td></td>
+<td width="20%"></td>
 </tr>
 <tr>
 <td>
