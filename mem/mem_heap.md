@@ -19,7 +19,7 @@ struct mem_block_info_t
     UT_LIST_BASE_NODE_T(mem_block_t) base;  // 头节点
     UT_LIST_NODE_T(mem_block_t) list;  // 基础的已分配内存列表
     ulint type;  // 依赖底层分配类型 HEAP_DYNAMIC, MEM_HEAP_BUF, MEM_HEAP_BTR_SEARCH
-    ulint free;  // 第一个空闲的地址
+    ulint free;  // 第一个空闲的地址, 
     ulint start;  // 第一次创建的时候的free地址
     void* free_block;  备用block, 仅仅在BTR_SEARCH方式可用
 }
@@ -157,7 +157,13 @@ void* mem_heap_zalloc(mem_heap_t* heap, ulint n)
 void* mem_heap_alloc(mem_heap_t* heap, ulint n)
 ```
 </td>
-<td>todo</td>
+<td>
+1. 首先是验证heap, 取出链表的最后一个节点
+2. 断言block的类型不是MEM_HEAP_BUFFER, 要分配的内存大小小于一个页-200字节
+3. 判断一下是否有足够的空闲空间，如果没有足够的空闲空间，那么就创建一个新的block块，添加到heap堆中去
+   注意分配的内存是按照8字节对齐的。
+4. todo
+</td>
 </tr>
 <tr>
 <td>
@@ -337,7 +343,15 @@ mem_block_t* mem_heap_create_block_func(mem_heap_t* heap, ulint n, const char* f
 mem_block_t* mem_heap_add_block(mem_heap_t* heap, ulint n)
 ```
 </td>
-<td>todo</td>
+<td>
+1. 验证heap, 取出队列的尾结点block, 也就是说每次分配内存的时候都是从尾部节点分配的
+2. 获取获取老的block大小，然后扩大2倍
+3. 如果heap的类型不是dynamic的话，也就是从buffer pool中取， 那么要保证分配的内存最大为  (页大小-200字节)
+   同时，每次扩大2倍的上限就是MEM_MAX_ALLOC_IN_BUF
+   但是如果页的大小，大于16kb, 那么我们就取8000, 不然还是取MEM_MAX_ALLOC_IN_BUF
+4. 根据新的大小，类型创建一个新的bloc块, 显然新的block块的大小是之前链表末尾大小的2倍
+5. 把新的block块，添加在链表的尾部
+</td>
 </tr>
 <tr>
 <td>
